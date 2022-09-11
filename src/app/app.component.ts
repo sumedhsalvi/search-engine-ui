@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'Shell Hacks Search Engine';
 
   secData!: Observable<Securities>;
-  displayedColumns: string[] = ['security_id', 'cusip', 'sedol', 'isin', 'ric', 'bloomberg', 'bbg', 'symbol', 'root_symbol', 'bb_yellow', 'spn'];
+  displayedColumns: string[] = ['security_id', 'cusip', 'sedol', 'isin', 'ric', 'bloomberg', 'bbg', 'symbol', 'root_symbol', 'bb_yellow', 'spn', 'priority'];
   securityList: Array<Securities> = [];
   dataSource!: MatTableDataSource<Securities>;
 
@@ -22,8 +22,6 @@ export class AppComponent {
   ) { }
 
   ngOnInit(): void {
-
-   //this.secData = this.searchService.SecData;
     this.searchService.loadData("").subscribe( data => {
       console.log(data);
       this.dataSource = new MatTableDataSource<Securities>(data);
