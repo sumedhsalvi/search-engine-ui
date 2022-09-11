@@ -1,0 +1,81 @@
+<h1>{{title}}</h1>
+<input type="text"
+  placeholder="Search for financial securities"
+  matInput>
+<button mat-raised-button>Search</button>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- security_id Column -->
+  <ng-container matColumnDef="security_id">
+    <th mat-header-cell *matHeaderCellDef> security_id </th>
+    <td mat-cell *matCellDef="let element"> {{element.security_id}} </td>
+  </ng-container>
+
+  <!-- cusip Column -->
+  <ng-container matColumnDef="cusip">
+    <th mat-header-cell *matHeaderCellDef> cusip </th>
+    <td mat-cell *matCellDef="let element"> {{element.cusip}} </td>
+  </ng-container>
+
+  <!-- sedol Column -->
+  <ng-container matColumnDef="sedol">
+    <th mat-header-cell *matHeaderCellDef> sedol </th>
+    <td mat-cell *matCellDef="let element"> {{element.sedol}} </td>
+  </ng-container>
+
+  <!-- isin Column -->
+  <ng-container matColumnDef="isin">
+    <th mat-header-cell *matHeaderCellDef> isin </th>
+    <td mat-cell *matCellDef="let element"> {{element.isin}} </td>
+  </ng-container>
+
+  <!-- ric Column -->
+  <ng-container matColumnDef="ric">
+    <th mat-header-cell *matHeaderCellDef> ric </th>
+    <td mat-cell *matCellDef="let element"> {{element.ric}} </td>
+  </ng-container>
+
+  <!-- bloomberg Column -->
+  <ng-container matColumnDef="bloomberg">
+    <th mat-header-cell *matHeaderCellDef> bloomberg </th>
+    <td mat-cell *matCellDef="let element"> {{element.bloomberg}} </td>
+  </ng-container>
+
+  <!-- bbg Column -->
+  <ng-container matColumnDef="bbg">
+    <th mat-header-cell *matHeaderCellDef> bbg </th>
+    <td mat-cell *matCellDef="let element"> {{element.bbg}} </td>
+  </ng-container>
+
+  <!-- symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  </ng-container>
+
+  <!-- root_symbol Column -->
+  <ng-container matColumnDef="root_symbol">
+    <th mat-header-cell *matHeaderCellDef> root_symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.root_symbol}} </td>
+  </ng-container>
+
+  <!-- bb_yellow Column -->
+  <ng-container matColumnDef="bb_yellow">
+    <th mat-header-cell *matHeaderCellDef> bb_yellow </th>
+    <td mat-cell *matCellDef="let element"> {{element.bb_yellow}} </td>
+  </ng-container>
+
+  <!-- spn Column -->
+  <ng-container matColumnDef="spn">
+    <th mat-header-cell *matHeaderCellDef> spn </th>
+    <td mat-cell *matCellDef="let element"> {{element.spn}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
