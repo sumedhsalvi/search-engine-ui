@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Securities } from './securities';
 
 @Injectable({
   providedIn: 'root'
@@ -8,36 +9,30 @@ import { HttpClient } from '@angular/common/http';
 export class SearchService {
 
   //rxjs
-  private _finSecData: BehaviorSubject<FinSecData>;
-  //medLibURL = 'https://asctb-api.herokuapp.com/v2/18lJe-9fq5fHWr-9HuFTzhWnmfygeuXs2bbsXO8vh1FU/0';
-  //anotomyInfo = 'https://www.ebi.ac.uk/ols/api/ontologies/uberon/terms?iri=http://purl.obolibrary.org/obo/';
+  //private _secData: BehaviorSubject<Securities>;
+  searchApiURL = 'https://shell-shacks-search-engine.herokuapp.com/apiv1/search-api?search_text=';
 
-  private secDataStore: {
-    finsecdata: FinSecData
-  }
+  // private finDataStore: {
+  //   secdata: Securities
+  // }
 
   constructor(private http: HttpClient) {
-    this.secDataStore = { finsecdata:{data:[],csv:""} };
-    this._finSecData =  new BehaviorSubject<FinSecData>({data:[],csv:""});
+    // this.finDataStore = { Securities = [] };
+    // this._secData =  new BehaviorSubject<Securities>({data:[],csv:""});
   }
 
-  get finSecData(): Observable<FinSecData> {
-    return this._finSecData.asObservable();
+  // get secData(): Observable<Securities> {
+  //   return this._secData.asObservable();
+  // }
+
+  loadData(searchText: string) {
+
+    return this.http.get<Securities[]>(this.searchApiURL + searchText);
+      // .subscribe(data => {
+      //   this.finDataStore.secdata = data;
+      //   this._secData.next(Object.assign({}, this.finDataStore).secdata);
+      // }, error => {
+      //   console.log("failed to fetch security data: ", error);
+      // });
   }
-
-  loadAll() {
-
-    return this.http.get<FinSecData>(this.medLibURL)
-      .subscribe(data => {
-        this.secDataStore.finsecdata = data;
-        this._finSecData.next(Object.assign({}, this.secDataStore).finsecdata);
-      }, error => {
-        console.log("failed to fetch security data: ", error);
-      });
-  }
-
-  getSecurityInfo(id: string): Observable<SecurityInfo> {
-    return this.http.get<SecurityInfo>(this.securityInfo+id);
-  }
-
 }
